@@ -1,0 +1,7 @@
+<div class="text-input">
+    <div class="label-wrapper">
+        <label [for]="id">{{label}}</label>
+        <fa-icon *ngIf="help" [icon]="['far', 'question-circle']"></fa-icon>
+    </div>
+    <input class="input" matInput [id]="id" [formControlName]="formControlName">
+</div>

@@ -1,0 +1,31 @@
+<div class="card">
+    <h3>פרטי חומרים</h3>
+    <div class="information" *ngIf="data.material">
+        <div class="column">
+            <div class="result-text">
+                <p class="field">פריט 1:</p>
+                <p class="data">{{data.material.name}}</p>
+            </div>
+            <div class="result-text">
+                <p class="field">ייעוד הפריט:</p>
+                <p class="data">{{data.material.designation}}</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="result-text">
+                <p class="field">קטגוריה:</p>
+                <p class="data">{{data.material.category.title}}</p>
+            </div>
+            <div class="result-text">
+                <p class="field">כמות מבוקשת:</p>
+                <p class="data">{{data.material.requestedNum.amount}}<span>{{data.material.requestedNum.measureType.title}}</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="information" *ngIf="data.material.components && data.material.components.length > 0">
+        <app-components-table [editable]="false" [components]="data.material.components"></app-components-table>
+    </div>
+    <div class="result-buttons">
+        <button mat-button class="edit" (click)="edit()">עריכה</button>
+    </div>
+</div>

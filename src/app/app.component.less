@@ -1,0 +1,19 @@
+@bgcolor: aliceblue;
+@bgcolorrow: white;
+@rowwidth: 600px;
+
+:host{
+    text-align: right;
+    direction: rtl;
+    mat-horizontal-stepper{
+        background-color: @bgcolor;
+        // .mat-horizontal-stepper-header-container{
+        //     max-width: 80px;
+        // }
+    }
+    app-shipping-data,app-applicant-information, app-material-information{
+        display: flex;
+        justify-content: center;
+    }
+
+}

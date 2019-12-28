@@ -1,0 +1,42 @@
+@import '../../assets/component-table.shared.less';
+
+.box-shadow{
+    border: 1px solid rgba(0,0,0,.03);
+    box-shadow: 0 0 5px rgba(121, 157, 220, 0.43), 0 0 5px rgba(121, 157, 220, 0.43);
+}
+
+:host{
+    display: flex;
+    &:extend(.box-shadow);
+    align-items: center;
+    margin-bottom: 3px;
+    .delete{
+        padding: 5px;
+        cursor: pointer;
+    }
+    .data{
+        display: flex;
+        width:100%;
+        & > *{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            align-self: center;
+            align-self: stretch;
+            padding: 5px;
+            width: 0;
+        }
+        .component-name{
+            flex: @componentnamefield;
+            border-left: 1px solid black;
+        }
+        .formula, .cas, .percentages{
+            flex: @formulafield;
+        }
+        .formula, .cas{
+            text-align: center;
+            border-left: 1px solid black;
+
+        }
+    }
+}

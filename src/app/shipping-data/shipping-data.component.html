@@ -1,0 +1,163 @@
+<form [formGroup]="firstFormGroup" class="stepper">
+  <div class="card-title">
+    <h3>פרטי המשלוח</h3>
+    <p>לתשומת ליבך יש למלא את כל הפרטים המסומנים די להמשיך</p>
+  </div>
+  <div class="card" formGroupName="deliveryTarget">
+    <h4>יעד למשלוח</h4>
+    <div class="area">
+      <p>אזור היעד</p>
+      <mat-radio-group aria-label="Select an option" formControlName="location">
+        <mat-radio-button value="עזה">עזה</mat-radio-button>
+        <mat-radio-button value='איו"ש'>איו"ש</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="information">
+      <div class="column">
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="reciever_name">שם מקבל המשלוח/חברה</label>
+            <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
+          </div>
+          <input class="input" id="reciever_name" formControlName="recieverName">
+          <div class="errors"
+            *ngIf="recieverNameControl.invalid && (recieverNameControl.dirty || recieverNameControl.touched)">
+            <div class="error" *ngIf="recieverNameControl.errors?.required; else invalidName">יש למלא את השם</div>
+            <ng-template #invalidName>
+              <!-- <div class="error" *ngIf="recieverName.errors?.required; else invalidName">required input</div> -->
+            </ng-template>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="address">כתובת</label>
+            <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
+          </div>
+          <input class="input" id="address" formControlName="address">
+          <div class="errors" *ngIf="addressControl.invalid && (addressControl.dirty || addressControl.touched)">
+            <div class="error" *ngIf="addressControl.errors?.required">יש למלא את הכתובת</div>
+          </div>
+        </div>
+        <div class="text-input" formGroupName="requiredPassage">
+          <div class="label-wrapper">
+            <label for="required_pass">מעבר מבוקש</label>
+          </div>
+          <select class="input" formControlName="id" id="required_pass">
+            <option *ngFor="let passage of passages | async" [value]="passage.id">
+              {{passage.title}}
+            </option>
+          </select>
+          <div class="errors"
+            *ngIf="requiredPassageIdControl.invalid && (requiredPassageIdControl.dirty || requiredPassageIdControl.touched)">
+            <div class="error" *ngIf="requiredPassageIdControl.errors?.required">יש לבחור מעבר מבוקש</div>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="driver_name">שם הנהג</label>
+          </div>
+          <input class="input" id="driver_name" formControlName="driverName">
+          <div class="errors"
+            *ngIf="driverNameControl.invalid && (driverNameControl.dirty || driverNameControl.touched)">
+            <div class="error" *ngIf="driverNameControl.errors?.required">יש למלא שם נהג</div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="reciever_phone_number">מספר טלפון של מקבל המשלוח</label>
+          </div>
+          <input class="input" id="reciever_phone_number" formControlName="recieverPhoneNumber">
+          <div class="errors"
+            *ngIf="recieverPhoneNumberControl.invalid && (recieverPhoneNumberControl.dirty || recieverPhoneNumberControl.touched)">
+            <div class="error" *ngIf="recieverPhoneNumberControl.errors?.required; else invalidPhone">יש למלא מספר טלפון
+              של מקבל המשלוח</div>
+            <ng-template #invalidPhone>
+              <div class="error" *ngIf="recieverPhoneNumberControl.errors?.invalidNumber">
+                {{recieverPhoneNumberControl.errors?.invalidNumber.msg}}</div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="capacity">נפח</label>
+          </div>
+          <select class="input" formControlName="capacity" id="capacity">
+            <option *ngFor="let capacityUnit of capacityUnits | async" [value]="capacityUnit.id">
+              {{capacityUnit.title}}
+            </option>
+          </select>
+          <div class="errors" *ngIf="capacityControl.invalid && (capacityControl.dirty || capacityControl.touched)">
+            <div class="error" *ngIf="capacityControl.errors?.required">יש לבחור נפח</div>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="money_value">ערך כספי של הסחורה</label>
+            <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
+          </div>
+          <div class="input-wrapper" formGroupName="moneyValue">
+            <input class="input" id="money_value" formControlName="value">
+            <div class="space"></div>
+            <select class="input" formControlName="moneyType">
+              <option *ngFor="let moneyType of moneyTypes | async" [value]="moneyType.title">
+                {{moneyType.title}}
+              </option>
+            </select>
+          </div>
+          <div class="errors"
+            *ngIf="moneyValueControl.invalid && (moneyValueControl.dirty || moneyValueControl.touched); else invalidMoney">
+            <div class="error" *ngIf="moneyValueControl.errors?.required; else invalidNumber">יש למלא כסף</div>
+            <ng-template #invalidNumber>
+              <div class="error" *ngIf="moneyValueControl.errors?.invalidNumber">
+                {{moneyValueControl.errors?.invalidNumber.msg}}</div>
+            </ng-template>
+          </div>
+          <ng-template #invalidMoney>
+
+            <div class="errors"
+              *ngIf="moneyTypeControl.invalid && (moneyTypeControl.dirty || moneyTypeControl.touched)">
+              <div class="error" *ngIf="moneyTypeControl.errors?.required">יש לבחור מטבע</div>
+            </div>
+          </ng-template>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="driver_id">ת"ז הנהג</label>
+          </div>
+          <input class="input" id="driver_id" formControlName="driverId">
+          <div class="errors" *ngIf="driverIdControl.invalid && (driverIdControl.dirty || driverIdControl.touched)">
+            <div class="error" *ngIf="driverIdControl.errors?.required; else invalidId">יש למלא ת"ז של הנהג</div>
+            <ng-template #invalidId>
+              <div class="error" *ngIf="driverIdControl.errors?.invalidId">{{driverIdControl.errors.invalidId?.msg}}
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card" formGroupName="moreData">
+    <h4>מידע נוסף (אופציונלי)</h4>
+    <div class="attaches" formArrayName="attaches">
+      <div class="">
+        <p>צירוף מסמכים נוספים לבקשה (אופציונלי)</p>
+      </div>
+      <div class="attaches-list">
+        <div class="attach" *ngFor="let attach of attaches.controls; let i = index">
+          <app-attach-box [attach]="attach" (delete)="deleteAttach(i)"></app-attach-box>
+        </div>
+      </div>
+      <button mat-flat-button class="add-attach" (click)="addAttach()">העלאת קובץ</button>
+    </div>
+    <div class="comments">
+      <p>הערות לבקשה (אופציונלי)</p>
+      <textarea formControlName="comments"></textarea>
+    </div>
+  </div>
+  <div class="navigation">
+    <button mat-button matStepperPrevious class="back">חזור</button>
+    <button mat-button matStepperNext class="next" (click)="nextStep()">המשך</button>
+  </div>
+</form>

@@ -1,0 +1,8 @@
+<div>
+    <div class="title">אישור וסיום</div>
+    <div *ngIf="data">
+        <app-applicant-details [data]="data.secondFormGroup" (goBack)="goBack.emit($event)"></app-applicant-details>
+        <app-material-details [data]="data.thirdFormGroup" (goBack)="goBack.emit($event)"></app-material-details>
+        <app-delivery-details [data]="data.firstFormGroup" (goBack)="goBack.emit($event)"></app-delivery-details>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<fa-icon class="delete" (click)="deleteRow()" [icon]="['fas', 'times']" *ngIf="editable"></fa-icon>
+<div class="data" *ngIf="component">
+    <div class="component-name">
+            {{component.inventoryName}}
+    </div>
+    <div class="formula">{{component.molecularFormula}}</div>
+    <div class="cas">{{component.casNumber}}</div>
+    <input class="percentages" *ngIf="editable" type="number" [formControl]="percentagesControl">
+    <div class="percentages" *ngIf="!editable">{{component.percentages}}</div>
+</div>

@@ -1,0 +1,59 @@
+<div class="card">
+    <h3>פרטי המבקש</h3>
+    <div class="information">
+        <div class="column">
+            <div class="result-text">
+                <p class="field">שם הספק:</p>
+                <p class="data">{{data.supply.name}}</p>
+            </div>
+            <div class="result-text">
+                <p class="field">מקור טובין:</p>
+                <p class="data">{{data.supply.origin.title}}</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="result-text">
+                <p class="field">מספר ח"פ:</p>
+                <p class="data">{{data.supply.numhp}}</p>
+            </div>
+            <div class="result-text">
+                <p class="field">מדינת מקור:</p>
+                <p class="data">{{data.supply.originCountry}}</p>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="information">
+        <div class="column">
+            <div class="result-text">
+                <p class="field">שם איש קשר:</p>
+                <p class="data">{{data.companyContact.fullname}}</p>
+            </div>
+            <div class="result-text">
+                <p class="field">כתובת דוא"ל:</p>
+                <p class="data">{{data.companyContact.email}}</p>
+            </div>
+            <div class="result-text">
+                <p class="field">מספר טלפון אופציונלי:</p>
+                <p class="data">{{data.companyContact.phoneNumber}}</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="result-text">
+                <p class="field">מספר ת"ז:</p>
+                <p class="data">{{data.companyContact.id}}</p>
+            </div>
+            <div class="result-text">
+                <p class="field">מספר טלפון נייד:</p>
+                <p class="data">{{data.companyContact.cellPhoneNumber}}</p>
+            </div>
+            <div class="result-text">
+                <p class="field">מספר פקס אופציונלי:</p>
+                <p class="data">{{data.companyContact.faxNumber}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="result-buttons">
+        <button mat-button class="edit" (click)="edit()">עריכה</button>
+    </div>
+</div>

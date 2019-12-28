@@ -1,0 +1,101 @@
+<form [formGroup]="thirdFormGroup" class="stepper">
+    <div class="card-title">
+        <h3 *ngIf="title">{{title}}</h3>
+        <p *ngIf="subTitle">{{subTitle}}</p>
+    </div>
+    <div class="card">
+        <h4>{{labels.material.title}}</h4>
+        <div class="information" formGroupName="material">
+            <div class="column">
+                <div class="text-input">
+                    <div class="label-wrapper">
+                        <label for="material_name">{{labels.material.name}}</label>
+                        <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
+                    </div>
+                    <input class="input" matInput id="material_name" formControlName="name">
+                    <div class="errors" *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)">
+                        <div class="error" *ngIf="nameControl.errors?.required">יש למלא את שם הפריט</div>
+                    </div>
+                </div>
+                <div class="text-input">
+                    <div class="label-wrapper">
+                        <label for="material_designation">{{labels.material.designation}}</label>
+                        <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
+                    </div>
+                    <input class="input" matInput id="material_designation" formControlName="designation">
+                    <div class="errors"
+                        *ngIf="designationControl.invalid && (designationControl.dirty || designationControl.touched)">
+                        <div class="error" *ngIf="designationControl.errors?.required">יש למלא את ייעוד הפריט</div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="text-input" formGroupName="category">
+                    <div class="label-wrapper">
+                        <label for="material_category">{{labels.material.category}}</label>
+                    </div>
+                    <select class="input" formControlName="id" id="material_category">
+                        <option *ngFor="let category of data.categories | async" [value]="category.id">
+                            {{category.title}}
+                        </option>
+                    </select>
+                    <div class="errors"
+                        *ngIf="categoryControlId.invalid && (categoryControlId.dirty || categoryControlId.touched)">
+                        <div class="error" *ngIf="categoryControlId.errors?.required">יש לבחור את הקטגוריה</div>
+                    </div>
+                </div>
+                <div class="text-input">
+                    <div class="label-wrapper">
+                        <label for="material_requestedNum">{{labels.material.requestedNum}}</label>
+                    </div>
+                    <div class="input-wrapper" formGroupName="requestedNum">
+                        <input class="input" matInput id="material_requestedNum" formControlName="amount">
+                        <div class="space"></div>
+                        <div style="display: flex;" formGroupName="measureType">
+                            <select class="input" formControlName="id">
+                                <option *ngFor="let unit of data.unitMeasures | async" [value]="unit.id">
+                                    {{unit.title}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="errors"
+                        *ngIf="amountControl.invalid && (amountControl.dirty || amountControl.touched); else measureTypeErrors">
+                        <div class="error" *ngIf="amountControl.errors?.required; else invalidNumber">יש למלא הכמות הנדרשת</div>
+                        <ng-template #invalidNumber>
+                            <div class="error" *ngIf="amountControl.errors?.invalidNumber">{{amountControl.errors?.invalidNumber.msg}}</div>
+                        </ng-template>
+                    </div>
+                    <ng-template #measureTypeErrors>
+                        <div class="errors"
+                            *ngIf="measureTypeControlId.invalid && (measureTypeControlId.dirty || measureTypeControlId.touched)">
+                            <div class="error" *ngIf="measureTypeControlId.errors?.required">יש לבחור יחידת מידה</div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <h4>{{labels.components.title}}</h4>
+        <div class="information" *ngIf="componentsControl && componentsControl.length > 0">
+            <app-components-table [editable]="true" [componentsFormArray]="componentsControl"
+                (deleteComponent)="deleteComponent($event)"></app-components-table>
+        </div>
+        <div class="add-component">
+            <p>{{labels.components.searchText}}</p>
+            <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
+        </div>
+        <input type="text" [formControl]="searchControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let ingredient of filteredIngredients| async" [value]="ingredient.id">
+                <app-component-option [component]="ingredient" (click)="addComponent(ingredient)">
+                </app-component-option>
+            </mat-option>
+        </mat-autocomplete>
+
+    </div>
+
+    <div class="navigation">
+        <button mat-button matStepperPrevious class="back">חזור</button>
+        <button mat-button matStepperNext class="next" (click)="nextStep()">המשך</button>
+    </div>
+</form>

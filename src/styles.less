@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: serif; font-weight: lighter;}
+
+.mat-stepper-horizontal{
+    display: flex !important;
+    flex-direction: column;
+}
+
+.mat-horizontal-stepper-header-container{
+    align-self: center;
+}
+
+[dir=rtl] .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:last-child::before{
+    right: 0;
+}
+
+[dir=rtl] .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:first-child::after{
+    left: 0;
+}

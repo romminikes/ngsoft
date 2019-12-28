@@ -1,0 +1,16 @@
+<div class="headers" *ngIf="components && components.length > 0">
+    <div class="headers-names">
+        <div class="component-name">{{headers.name}}</div>
+        <div class="formula">{{headers.formula}}</div>
+        <div class="cas">{{headers.cas}}</div>
+        <div class="percentages">{{headers.percentages}}</div>
+    </div>
+</div>
+<div *ngIf="editable && components && components.length > 0">
+    <app-component-row *ngFor="let component of components; let i = index" [component]="component" [editable]="editable" [percentagesControl]="componentsFormArray.at(i).get('percentages')"
+                        (delete)="delete($event)"></app-component-row>
+</div>
+
+<div *ngIf="!editable && components && components.length > 0">
+    <app-component-row *ngFor="let component of components; let i = index" [component]="component" [editable]="editable" (delete)="delete($event)"></app-component-row>
+</div>

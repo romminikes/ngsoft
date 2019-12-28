@@ -1,0 +1,144 @@
+<form [formGroup]="secondFormGroup" class="stepper" *ngIf="secondFormGroup">
+  <div class="card-title">
+    <h3>פרטי המשלוח</h3>
+    <p>לתשומת ליבך יש למלא את כל הפרטים המסומנים די להמשיך</p>
+  </div>
+  <div class="card">
+    <h4>יעד למשלוח</h4>
+    <div class="information" formGroupName="supply">
+      <div class="column">
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="supply_name">{{labels.supply.name}}</label>
+          </div>
+          <input class="input" id="supply_name" formControlName="name">
+          <div class="errors" *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)">
+            <div class="error" *ngIf="nameControl.errors?.required">יש למלא את השם</div>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="num_hp">{{labels.supply.numhp}}</label>
+          </div>
+          <input class="input" id="num_hp" formControlName="numhp">
+          <div class="errors" *ngIf="numhpControl.invalid && (numhpControl.dirty || numhpControl.touched)">
+            <div class="error" *ngIf="numhpControl.errors?.required; else invalidNumber">יש למלא מספר ח"פ</div>
+            <ng-template #invalidNumber>
+              <div class="error" *ngIf="numhpControl.errors?.invalidNumber">
+                {{numhpControl.errors?.invalidNumber.msg}}</div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="text-input" formGroupName="origin">
+          <div class="label-wrapper">
+            <label for="supply_origin">{{labels.supply.origin}}</label>
+          </div>
+          <select class="input" formControlName="id" id="supply_origin">
+            <option *ngFor="let origin of origins | async" [value]="origin.id">
+              {{origin.title}}
+            </option>
+          </select>
+          <div class="errors" *ngIf="originControlId.invalid && (originControlId.dirty || originControlId.touched)">
+            <div class="error" *ngIf="originControlId.errors?.required">יש לבחור מקום טובין</div>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="origin_country">{{labels.supply.originCountry}}</label>
+          </div>
+          <input class="input" id="origin_country" formControlName="originCountry">
+          <div class="errors"
+            *ngIf="originCountryControl.invalid && (originCountryControl.dirty || originCountryControl.touched)">
+            <div class="error" *ngIf="originCountryControl.errors?.required">יש למלא מדינת מקור</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="information" formGroupName="companyContact">
+      <div class="column">
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="company_contact_fullname"> {{labels.companyContact.fullname}}</label>
+          </div>
+          <input class="input" id="company_contact_fullname" formControlName="fullname">
+          <div class="errors" *ngIf="fullnameControl.invalid && (fullnameControl.dirty || fullnameControl.touched)">
+            <div class="error" *ngIf="fullnameControl.errors?.required">יש למלא שם מלא</div>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="company_contact_email">{{labels.companyContact.email}}</label>
+            <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
+          </div>
+          <input class="input" id="company_contact_email" formControlName="email">
+          <div class="errors" *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)">
+            <div class="error" *ngIf="emailControl.errors?.required; else invalidEmail">יש למלא אימייל</div>
+            <ng-template #invalidEmail>
+              <div class="error" *ngIf="emailControl.errors?.email">אימייל לא תקין</div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="company_contact_phone_number">{{labels.companyContact.phoneNumber}}</label>
+          </div>
+          <input class="input" id="company_contact_phone_number" formControlName="phoneNumber">
+          <div class="errors"
+            *ngIf="phoneNumberControl.invalid && (phoneNumberControl.dirty || phoneNumberControl.touched)">
+            <div class="error" *ngIf="phoneNumberControl.errors?.invalidNumber">
+              {{phoneNumberControl.errors.invalidNumber?.msg}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="company_contact_id"> {{labels.companyContact.id}}</label>
+          </div>
+          <input class="input" id="company_contact_id" formControlName="id">
+          <div class="errors" *ngIf="idControl.invalid && (idControl.dirty || idControl.touched)">
+            <div class="error" *ngIf="idControl.errors?.required; else invalidId">יש למלא ת"ז</div>
+            <ng-template #invalidId>
+              <div class="error" *ngIf="idControl.errors?.invalidId">{{idControl.errors.invalidId?.msg}}</div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="company_contact_cell_phone_number">{{labels.companyContact.cellPhoneNumber}}</label>
+          </div>
+          <input class="input" id="company_contact_cell_phone_number" formControlName="cellPhoneNumber">
+          <div class="errors"
+            *ngIf="cellPhoneNumberControl.invalid && (cellPhoneNumberControl.dirty || cellPhoneNumberControl.touched)">
+            <div class="error" *ngIf="cellPhoneNumberControl.errors?.required; else invalidPhoneNumber">יש למלא מספר
+              טלפון פרטי</div>
+            <ng-template #invalidPhoneNumber>
+              <div class="error" *ngIf="cellPhoneNumberControl.errors?.invalidNumber">
+                {{cellPhoneNumberControl.errors.invalidNumber?.msg}}</div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="text-input">
+          <div class="label-wrapper">
+            <label for="company_contact_fax_number">{{labels.companyContact.faxNumber}}</label>
+          </div>
+          <input class="input" id="company_contact_fax_number" formControlName="faxNumber">
+          <div class="errors"
+            *ngIf="faxNumberControl.invalid && (faxNumberControl.dirty || faxNumberControl.touched)">
+            <div class="error" *ngIf="faxNumberControl.errors?.invalidNumber">
+              {{faxNumberControl.errors.invalidNumber?.msg}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <button mat-button matStepperPrevious class="back">חזור</button>
+    <button mat-button matStepperNext class="next" (click)="nextStep()">המשך</button>
+  </div>
+</form>

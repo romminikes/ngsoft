@@ -1,0 +1,185 @@
+@bgcolorrow: white;
+@cardwidth: 80%;
+@titlewidth: calc(@cardwidth + 2*@cardpaddingright);
+@cardpaddingtop: 10px;
+@cardpaddingbottom: 20px;
+@cardpaddingright: 40px;
+@cardpaddingleft: @cardpaddingright;
+
+@cardpadding: @cardpaddingtop @cardpaddingright @cardpaddingbottom;
+
+@inputsmargintopandbottom: 10px;
+@inputheight: 23px;
+@windowmaxwidth: 900px;
+@windowminwidth: 550px;
+
+.box-shadow{
+    border: 1px solid rgba(0,0,0,.03);
+    box-shadow: 0 0 5px rgba(0,0,0,.24), 0 0 5px rgba(0,0,0,.12);
+}
+
+.default-btn{
+    background-color: royalblue;
+    color: white;
+}
+
+.input.ng-touched.ng-invalid:not(form)  {
+    border: 2px solid #a94442;
+}
+
+
+.card{
+    display: flex;
+    flex-direction: column;
+    background-color: @bgcolorrow;
+    width: @cardwidth;
+    padding: @cardpadding;
+    &:extend(.box-shadow);
+    margin-bottom: 5px;
+    & > *{
+        margin: 10px 0;
+    }
+    .information{
+        display: flex;
+        width: 100%;
+        .column{
+            display: flex;
+            flex-direction: column;
+            padding: 0 10px;
+            flex: 1;
+            .text-input{
+                display: flex;
+                flex-direction: column;
+                margin: @inputsmargintopandbottom 0;
+                flex: 1;
+                position: relative;
+                .label-wrapper{
+                    display: flex;
+                    justify-content: space-between;
+                    margin: @inputsmargintopandbottom 0;
+                    label{
+                        order: 1;
+                    }
+                    fa-icon{
+                        order: 2;
+                    }
+                }
+                .input-wrapper{
+                    display: flex;
+                    justify-content: space-between;
+                    select{
+                        flex: 0;
+                        height: auto;
+                    }
+                    .space{
+                        content: "";
+                        width: 35px;
+                    }
+                    input{
+                        flex: 1;
+                    }
+                }
+                .input{
+                    text-align: right;
+                    height: @inputheight;
+                    margin: 0;
+                }
+                select{
+                    flex: 1;
+                }
+                .errors{
+                    position: absolute;
+                    color: red;
+                    font-size: xx-small;
+                    bottom: 0;
+                    height: 0;
+                }
+            }
+            .result-text{
+                display: flex;
+                p{
+                    margin: @inputsmargintopandbottom 0;
+                }
+                .field{
+                    color: royalblue;
+                }
+                .data{
+                    padding-right: 5px;
+                    span{
+                        margin-right: 3px;
+                    }
+                }
+            }
+        }
+    }
+    .attaches{
+        & > *{
+            margin: 8px 0;
+        }
+        .attaches-list{
+            display: flex;
+            flex-wrap: wrap;
+            .attach{
+                border: 1px solid rgba(0,0,0,.03);
+                box-shadow: 0 0 5px rgba(0,0,0,.24), 0 0 5px rgba(0,0,0,.12);
+                margin: 3px;
+            }
+        }
+        .add-attach{
+            &:extend(.default-btn);
+        }
+    }
+    .comments{
+        display: flex;
+        flex-direction: column;
+        textarea{
+            resize: none;
+            width: 100%;
+            height: 58px;
+        }
+    }
+    .add-component{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p{
+            margin: 0;
+        }
+    }
+    .result-buttons{
+        display: flex;
+        justify-content: flex-end;
+        .edit{
+            background-color: transparent;
+            border: 2px solid royalblue;
+            color: royalblue;
+            font-weight: bolder;
+            border-radius: 2%;
+        }
+    }
+}
+
+.stepper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: @windowmaxwidth;
+    min-width: @windowminwidth;
+    flex: 1;
+    .card-title, .navigation{
+        width: @titlewidth;
+    }
+    .navigation{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        .back{      
+            background-color: white;
+            color: gray;
+            &:extend(.box-shadow);
+        }
+        .next{
+            &:extend(.default-btn);
+        }
+    }
+}

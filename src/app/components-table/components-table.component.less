@@ -1,0 +1,23 @@
+@import '../../assets/component-table.shared.less';
+
+:host{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    .headers{
+        display: flex;
+        color: royalblue;
+        .headers-names{
+            display: flex;
+            width: 100%;
+            .component-name{
+                flex: @componentnamefield;
+                align-content: space-around;
+            }
+            .formula, .cas, .percentages{
+                flex: @formulafield;
+                text-align: center;
+            }
+        }
+    }
+}
