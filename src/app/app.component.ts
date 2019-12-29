@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faQuestionCircle, faUserCircle } from '@fortawesome/free-regular-svg-icons'
-import { faArrowRight, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle, faUserCircle, faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { faArrowRight, faTimes, faBox, faPeopleCarry } from '@fortawesome/free-solid-svg-icons';
 import { ValidatorsPatternsService } from './services/validators-patterns.service';
 import { Subscription } from 'rxjs';
 
@@ -22,7 +22,7 @@ export class AppComponent implements OnDestroy {
 
   constructor(private _formBuilder: FormBuilder, private library: FaIconLibrary, private validation: ValidatorsPatternsService) {
 
-    this.library.addIcons(faArrowRight, faTimes, faQuestionCircle, faUserCircle);
+    this.library.addIcons(faArrowRight, faTimes, faQuestionCircle, faUserCircle, faBox, faPeopleCarry, faPaperPlane);
   }
 
   ngOnInit() {

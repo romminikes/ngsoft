@@ -1,27 +1,35 @@
-<mat-horizontal-stepper labelPosition="bottom" #stepper>
+<mat-horizontal-stepper labelPosition="bottom" #stepper linear>
   <ng-template matStepperIcon="box">
-    <mat-icon>account_circle</mat-icon>
+    <fa-icon [icon]="['fas', 'box']"></fa-icon>
   </ng-template>
-  <ng-template matStepperIcon="firststep">
+  <ng-template matStepperIcon="person">
     <fa-icon [icon]="['far', 'user-circle']"></fa-icon>
   </ng-template>
 
-  <mat-step [stepControl]="mainFormGroup.get('firstFormGroup')" state="firststep">
+  <ng-template matStepperIcon="carry">
+    <fa-icon [icon]="['fas', 'people-carry']"></fa-icon>
+  </ng-template>
+  
+  <ng-template matStepperIcon="paper">
+    <fa-icon [icon]="['far', 'paper-plane']"></fa-icon>
+  </ng-template>
+
+  <mat-step [stepControl]="mainFormGroup.get('firstFormGroup')" state="carry">
     <ng-template matStepLabel>פרטי המשלוח</ng-template>
     <app-shipping-data [firstFormGroup]="mainFormGroup.get('firstFormGroup')"></app-shipping-data>
   </mat-step>
 
-  <mat-step [stepControl]="mainFormGroup.get('secondFormGroup')" state="box">
+  <mat-step [stepControl]="mainFormGroup.get('secondFormGroup')" state="person">
     <ng-template matStepLabel>פרטי המבקש</ng-template>
     <app-applicant-information [secondFormGroup]="mainFormGroup.get('secondFormGroup')"></app-applicant-information>
   </mat-step>
 
-  <mat-step [stepControl]="mainFormGroup.get('thirdFormGroup')">
+  <mat-step [stepControl]="mainFormGroup.get('thirdFormGroup')" state="box">
     <ng-template matStepLabel>פרטי הטובין</ng-template>
     <app-material-information [thirdFormGroup]="mainFormGroup.get('thirdFormGroup')"></app-material-information>
   </mat-step>
 
-  <mat-step>
+  <mat-step state="paper">
     <ng-template matStepLabel>אישור וסיום</ng-template>
     <app-final-step *ngIf="formValid && allData" [data]="allData" (goBack)="goBack($event, stepper)"></app-final-step>
   </mat-step>

@@ -13,6 +13,24 @@ body { margin: 0; font-family: serif; font-weight: lighter;}
     align-self: center;
 }
 
+.mat-step-header .mat-step-icon{
+    background-color: transparent;
+    color: royalblue;
+    border: royalblue solid 1px;
+}
+
+.mat-step-header .mat-step-icon-selected{
+    background-color: royalblue;
+    color: white;
+    border: royalblue solid 1px;
+}
+
+mat-stepper-header[ng-reflect-active=true] .mat-step-icon{
+    background-color: royalblue;
+    color: transparent;
+    border: royalblue solid 1px;
+}
+
 [dir=rtl] .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:last-child::before{
     right: 0;
 }
